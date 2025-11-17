@@ -8,7 +8,7 @@ import Loading from '../components/Loading';
 
 const Layout = () => {
   const user=dummyUserData;
-  const [isSidebarOpen,setSidebarOpen]=useState(false);
+  const [isSidebarOpen,setSidebarOpen]=useState(null);
 
   return user ? (
     <div className='w-full flex h-screen overflow-hidden'>

@@ -41,11 +41,11 @@ const Discover = () => {
           </div>
         </div>
 
-        <div>
+        <div className='flex  gap-5 '>
           {
-            users.map((item,index)=>{
+            users.map((item)=>(
               <UserCard user={item} key={item._id}/>
-            })
+            ))
           }
         </div>
         {
