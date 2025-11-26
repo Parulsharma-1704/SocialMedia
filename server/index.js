@@ -6,8 +6,6 @@ import { serve } from "inngest/express";
 import { inngest, functions } from './inngest/index.js';
 import { clerkMiddleware } from '@clerk/express';
 import route from './routes/userRoutes.js';
-import { Connection } from 'mongoose';
-import sendEmail from './configs/nodeMailer.js';
 
 const app=express();
 

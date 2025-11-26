@@ -1,5 +1,7 @@
 import { Inngest } from "inngest";
 import user from "../models/user.js";
+import Connection from '../models/connection.js';
+import sendEmail from '../configs/nodeMailer.js';
 
 // Create a client to send and receive events
 export const inngest = new Inngest({ id: "socialMedia-app" });
@@ -102,7 +104,7 @@ const sendNewConnectionRequestReminder=inngest.createFunction(
             #10b981;">here</a> to accept or reject the request</p>
             <br>
             <p>Thanks,<br>Stay Connected</p>
-            </div>`;
+            </div>`
 
             await sendEmail({
                 to: connection.to_user_id.email,

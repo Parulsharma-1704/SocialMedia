@@ -1,5 +1,5 @@
-import { Connection } from "mongoose";
-import imagekit from "../configs/imageKit";
+import Connection from "../models/connection.js";
+import imagekit from "../configs/imageKit.js";
 import user from "../models/user.js";
 import fs from 'fs';
 import { connect } from "http2";

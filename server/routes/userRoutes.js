@@ -1,7 +1,7 @@
 import express from 'express';
 import {protect} from '../middlewares/auth.js';
 import { acceptConnectionRequest, discoverUsers, followUser, getUserConnections, getUserData, sendConnectionRequest, unfollowUser, updateUserData }
- from '../controllers/userController';
+ from '../controllers/userController.js';
 import { upload } from '../configs/multer.js';
 
 const route=express.Router();
