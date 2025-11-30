@@ -2,7 +2,6 @@ import Connection from "../models/connection.js";
 import imagekit from "../configs/imageKit.js";
 import user from "../models/user.js";
 import fs from 'fs';
-import { connect } from "http2";
 
 //Get user data using userId
 export const getUserData=async (req,res)=>{
@@ -68,7 +67,7 @@ export const updateUserData=async (req,res)=>{
             const buffer=fs.readFileSync(cover.path);
             const response=await imagekit.upload({
                 file: buffer,
-                fileName: profile.originalname,
+                fileName: cover.originalname,
             })
             const url=imagekit.url({
                 path: response.filePath,
@@ -103,7 +102,7 @@ export const discoverUsers=async (req,res)=>{
             {location: new RegExp(input,'i')},
         ]
        })
-       const filteredUers=allUsers.filter((user)=>(user._id !== userId));
+       const filteredUers=allUsers.filter((u)=>(u._id !== userId));
        res.json({success: true,users: filteredUers});
     }
     catch(error){
@@ -148,8 +147,8 @@ export const unfollowUser=async (req,res)=>{
        User.following=User.following.filter((user)=>user!==id);
        await User.save();
 
-       const toUser=await user.findById(userId);
-       toUser.followers=toUser.followers.filter((user)=>user!==id);
+       const toUser=await user.findById(id);
+       toUser.followers=toUser.followers.filter((u)=>u!==id);
        await toUser.save();
 
        res.json({success: true,message: 'You are no longer following this user'});
@@ -207,10 +206,10 @@ export const getUserConnections= async(req,res)=>{
 
         const connections=User.connections;
         const followers=User.followers;
-        const following=user.following;
+        const following=User.following;
 
         const pendingConnections=(await Connection.find({to_user_id: userId,
-            Status: 'pending'}).populate('from_user_id')).map(connection=>connection.from_user_id)
+            status: 'pending'}).populate('from_user_id')).map(connection=>connection.from_user_id)
 
         res.json({success: true, connections, followers, following, pendingConnections});
     }
